@@ -6,8 +6,7 @@ const Answer = (props) => {
 
     return (
             <div style={{ flex: 1, margin: '2%' }}>
-                fasfasf
-                <TextInput label="Answer" rightSection={<Button onClick={() => props.removeAnswer(id)}>Remove</Button>}></TextInput>
+                <TextInput rightSection={<Button onClick={() => props.removeAnswer(id)}>Remove</Button>}></TextInput>
             </div>
     );
 }
