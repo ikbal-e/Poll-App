@@ -5,7 +5,7 @@ import Answer from './answer';
 
 const Question = () => {
 
-    const [answers, setAnswers] = useState([{id: uniqueId()}, {id: uniqueId()}]);
+    const [answers, setAnswers] = useState([{ id: uniqueId(), text: '' }, { id: uniqueId(), text: '' }]);
 
     const [requireCheck, setRequireCheck] = useState(true);
     const [multiSelectCheck, setMultiSelectCheck] = useState(false);
@@ -21,6 +21,13 @@ const Question = () => {
     const addAnswer = () => {
         setAnswers([...answers, { id: uniqueId() }]);
         console.log(answers);
+    }
+
+    const onAnswerChange = (event, id) => {
+        setAnswers(answers.map(x => x.id === id ? { ...x, text: event.target.value } : x));
+
+        console.log(answers);
+
     }
 
     const removeAnswer = (id) => {
@@ -48,7 +55,7 @@ const Question = () => {
                             </div>
                         </Popover>
                     } />
-                <div style={{display: 'flex', flexDirection: 'row', marginTop: 10}}>
+                <div style={{ display: 'flex', flexDirection: 'row', marginTop: 10 }}>
                     <Checkbox
                         label="Required"
                         checked={requireCheck}
@@ -65,10 +72,11 @@ const Question = () => {
                 <p>Answers</p>
                 {answers?.map((v, i) =>
                     <div key={v.id}>
-                        <Answer key={v.id} id={v.id} removeAnswer={removeAnswer}></Answer>
+                        <Answer key={v.id} id={v.id} onAnswerChange={onAnswerChange} removeAnswer={removeAnswer}></Answer>
                     </div>
                 )}
                 <Button variant='outline' onClick={addAnswer}>+ Answer</Button>
+                {JSON.stringify(answers)}
             </div>
         </div>
     );
